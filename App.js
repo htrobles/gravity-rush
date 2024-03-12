@@ -1,11 +1,24 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from "expo-status-bar";
+import { useState } from "react";
+import { StyleSheet, Text, View } from "react-native";
+import { GameEngine } from "react-native-game-engine";
+import Physics from "./Physics";
+import entities from "./entities";
+import Constants from "./Constants";
 
 export default function App() {
+  const [running, setRunning] = useState(false);
+
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+      <GameEngine
+        style={styles.container}
+        systems={[Physics]}
+        entities={entities()}
+        running={true}
+      >
+        <StatusBar hidden={true} />
+      </GameEngine>
     </View>
   );
 }
@@ -13,8 +26,6 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    // backgroundColor: "#0f1e2b",
   },
 });
