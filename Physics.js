@@ -27,7 +27,7 @@ const Physics = (entities, { touches, dispatch, events, time }) => {
         y: getY(),
       });
     } else {
-      const translationX = -200 * deltaTime;
+      const translationX = -Constants.OBSTACLE_SPEED * deltaTime;
       Matter.Body.translate(box.body, { x: translationX, y: 0 });
     }
   }

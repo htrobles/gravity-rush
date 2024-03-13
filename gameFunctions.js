@@ -11,7 +11,7 @@ export function switchGravity(engine) {
 }
 
 export function pushPlayer(entity) {
-  Matter.Body.applyForce(entity.body, entity.body.position, { x: 0.125, y: 0 });
+  Matter.Body.applyForce(entity.body, entity.body.position, { x: 0.01, y: 0 });
 }
 
 export function resetGame(entities, dispatch) {

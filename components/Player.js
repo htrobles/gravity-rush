@@ -34,7 +34,9 @@ export default (world, pos, extraOptions) => {
     {
       label: "Player",
       isStatic: false,
-      mass: 10,
+      frictionStatic: 0,
+      friction: 0,
+      // mass: 10,
     }
   );
   Matter.World.add(world, player);

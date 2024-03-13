@@ -1,7 +1,7 @@
-import { Dimensions, View } from "react-native";
+import { View } from "react-native";
 import Matter from "matter-js";
 
-const Box = ({ size, body, color, extraOptions }) => {
+const Box = ({ size, body }) => {
   const {
     position: { x, y },
   } = body;
@@ -26,13 +26,13 @@ const Box = ({ size, body, color, extraOptions }) => {
 };
 
 export default (world, pos, size, extraOptions) => {
-  const { label, isStatic, isObstacle, isDangerous } = extraOptions;
+  const { label, isStatic, isObstacle } = extraOptions;
 
   const box = Matter.Bodies.rectangle(pos.x, pos.y, size.width, size.height, {
     label: label,
     isStatic,
     isObstacle,
-    isDangerous,
+    isDangerous: true,
   });
   Matter.World.add(world, box);
 
