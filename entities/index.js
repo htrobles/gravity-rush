@@ -10,7 +10,7 @@ const GROUND_HEIGHT = Constants.SCREEN_HEIGHT * 0.05;
 export default function entities() {
   let engine = Matter.Engine.create({ enableSleeping: false });
   let world = engine.world;
-  engine.gravity.y = 0.5;
+  engine.gravity.y = Constants.GRAVITY_STRENGTH;
 
   return {
     physics: { engine, world },

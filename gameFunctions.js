@@ -4,9 +4,9 @@ import { getY } from "./_utils";
 
 export function switchGravity(engine) {
   if (!engine.world.gravity.y) {
-    engine.world.gravity.y = 0.5;
+    engine.world.gravity.y = Constants.GRAVITY_STRENGTH;
   } else {
-    engine.world.gravity.y *= -1;
+    engine.world.gravity.y *= -Constants.GRAVITY_STRENGTH;
   }
 }
 

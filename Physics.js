@@ -5,6 +5,7 @@ import { pushPlayer, resetGame, switchGravity } from "./gameFunctions";
 
 const Physics = (entities, { touches, dispatch, events, time }) => {
   const engine = entities.physics.engine;
+  const deltaTime = time.delta / 1000; // Convert milliseconds to seconds
 
   // Obstacle Movement
   for (let i = 1; i <= 3; i++) {
@@ -26,7 +27,8 @@ const Physics = (entities, { touches, dispatch, events, time }) => {
         y: getY(),
       });
     } else {
-      Matter.Body.translate(box.body, { x: -3, y: 0 });
+      const translationX = -200 * deltaTime;
+      Matter.Body.translate(box.body, { x: translationX, y: 0 });
     }
   }
 
