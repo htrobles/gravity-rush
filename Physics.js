@@ -7,29 +7,26 @@ const Physics = (entities, { touches, dispatch, events, time }) => {
   const engine = entities.physics.engine;
 
   // Obstacle Movement
-  for (let i = 1; i <= 1; i++) {
-    // TODO update i max to 2
+  for (let i = 1; i <= 3; i++) {
     const box = entities[`Obstacle${i}`];
 
-    for (let i = 1; i <= 3; i++) {
-      const box = entities[`Obstacle${i}`];
+    if (box.body.bounds.max.x < 0) {
+      dispatch({ type: "add-score" });
 
-      if (box.body.bounds.max.x < 0) {
-        if (roll(50)) {
-          box.isDangerous = true;
-          box.body.isDangerous = true;
-        } else {
-          box.isDangerous = false;
-          box.body.isDangerous = false;
-        }
-
-        Matter.Body.setPosition(box.body, {
-          x: Constants.SCREEN_WIDTH + Constants.OBSTACLE_HEIGHT / 2,
-          y: getY(),
-        });
+      if (roll(50)) {
+        box.isDangerous = true;
+        box.body.isDangerous = true;
       } else {
-        Matter.Body.translate(box.body, { x: -3, y: 0 });
+        box.isDangerous = false;
+        box.body.isDangerous = false;
       }
+
+      Matter.Body.setPosition(box.body, {
+        x: Constants.SCREEN_WIDTH + Constants.OBSTACLE_HEIGHT / 2,
+        y: getY(),
+      });
+    } else {
+      Matter.Body.translate(box.body, { x: -3, y: 0 });
     }
   }
 

@@ -1,24 +1,22 @@
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
-import {
-  StyleSheet,
-  Text,
-  TouchableHighlight,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { StyleSheet, View } from "react-native";
 import { GameEngine } from "react-native-game-engine";
 import Physics from "./Physics";
 import entities from "./entities";
 import Constants from "./Constants";
 import ControlButton from "./components/ControlButton";
 import GameOverModal from "./components/GameOverModal";
+import Scoreboard from "./components/Scoreboard";
 
 export default function App() {
   const [gameEngine, setGameEngine] = useState(null);
   const [running, setRunning] = useState(false);
   const [isGravityDown, setIsGravityDown] = useState(true);
   const [showGameOver, setShowGameOver] = useState(false);
+  const [score, setScore] = useState(0);
+  const [dashProgress, setDashProgress] = useState(0);
+  const [dashes, setDashes] = useState(1);
 
   const handlePressSwitchGravity = () => {
     if (!running) {
@@ -33,6 +31,17 @@ export default function App() {
     gameEngine.dispatch({ type: "dash" });
   };
 
+  const handleGainDashProgress = () => {
+    if (dashes < 5) {
+      if (dashProgress < 5) {
+        setDashProgress(dashProgress + 1);
+      } else {
+        setDashes(dashes + 1);
+        setDashProgress(0);
+      }
+    }
+  };
+
   const handleEvent = (e) => {
     switch (e.type) {
       case "game-over":
@@ -41,6 +50,10 @@ export default function App() {
         break;
       case "pause":
         setRunning(false);
+        break;
+      case "add-score":
+        setScore(score + 1);
+        handleGainDashProgress();
         break;
       default:
         break;
@@ -51,6 +64,9 @@ export default function App() {
     setRunning(true);
     gameEngine.dispatch({ type: "reset-game" });
     setShowGameOver(false);
+    setScore(0);
+    setDashProgress(0);
+    setDashes(1);
   };
 
   return (
@@ -75,9 +91,10 @@ export default function App() {
       </ControlButton>
       {running ? (
         <ControlButton styles={[styles.dashBtn]} onPress={handlePressDash}>
-          Dash
+          {dashes}
         </ControlButton>
       ) : null}
+      <Scoreboard score={score} />
       {showGameOver ? <GameOverModal onRestart={handleRestart} /> : null}
     </View>
   );
