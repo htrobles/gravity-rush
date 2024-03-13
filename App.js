@@ -17,6 +17,7 @@ export default function App() {
   const [gameEngine, setGameEngine] = useState(null);
   const [running, setRunning] = useState(false);
   const [isGravityDown, setIsGravityDown] = useState(true);
+  const [showGameOver, setShowGameOver] = useState(false);
 
   const handlePressSwitchGravity = () => {
     if (!running) {
@@ -31,6 +32,23 @@ export default function App() {
     gameEngine.dispatch({ type: "dash" });
   };
 
+  const handleEvent = (e) => {
+    console.log(e);
+
+    switch (e.type) {
+      case "game-over":
+        setRunning(false);
+        break;
+      case "collide":
+        setRunning(false);
+        console.log(e);
+        break;
+
+      default:
+        break;
+    }
+  };
+
   return (
     <View style={styles.container}>
       <GameEngine
@@ -41,6 +59,7 @@ export default function App() {
         systems={[Physics]}
         entities={entities()}
         running={running}
+        onEvent={handleEvent}
       >
         <StatusBar hidden={true} />
       </GameEngine>
