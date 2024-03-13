@@ -7,12 +7,15 @@ import {
   View,
 } from "react-native";
 
-function GameOverModal({ onRestart }) {
+function GameOverModal({ onRestart, score }) {
   return (
     <View style={styles.backdrop}>
       <View style={styles.container}>
-        <Text style={[styles.text, styles.heading]}>Game Over</Text>
-        <Text style={[styles.text, styles.subheading]}>Try again?</Text>
+        <Text style={[styles.text, styles.heading]}>Game Over!</Text>
+        <Text style={[styles.text, styles.subheading]}>
+          Your score is {score}
+        </Text>
+        <Text style={[styles.text, styles.prompt]}>Try again?</Text>
         <TouchableOpacity style={styles.button} onPress={onRestart}>
           <Text style={styles.buttonText}>Let's Go!</Text>
         </TouchableOpacity>
@@ -52,6 +55,10 @@ const styles = StyleSheet.create({
   subheading: {
     fontSize: 24,
     marginBottom: 32,
+  },
+  prompt: {
+    fontSize: 18,
+    marginBottom: 24,
   },
   button: {
     backgroundColor: "#0099d1",

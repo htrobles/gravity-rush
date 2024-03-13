@@ -56,7 +56,7 @@ export default function App() {
         setRunning(false);
         break;
       case "add-score":
-        setScore(score + 1);
+        setScore(score + Constants.SCORE_INCREMENT);
         handleGainDashProgress();
         break;
       default:
@@ -103,7 +103,9 @@ export default function App() {
         </DashButton>
       ) : null}
       <Scoreboard score={score} />
-      {showGameOver ? <GameOverModal onRestart={handleRestart} /> : null}
+      {showGameOver ? (
+        <GameOverModal onRestart={handleRestart} score={score} />
+      ) : null}
     </View>
   );
 }
