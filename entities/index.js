@@ -3,6 +3,7 @@ import Constants from "../Constants";
 import Player from "../components/Player";
 import Box from "../components/Box";
 import Obstacle from "../components/Obstacle";
+import { getY } from "../_utils";
 
 const GROUND_HEIGHT = Constants.SCREEN_HEIGHT * 0.05;
 
@@ -39,40 +40,42 @@ export default function entities() {
     ),
     Obstacle1: Obstacle(world, {
       pos: {
-        x: Constants.SCREEN_WIDTH + (Constants.SCREEN_HEIGHT * 0.3) / 2,
-        y:
-          Constants.SCREEN_HEIGHT -
-          (Constants.SCREEN_HEIGHT * 0.5) / 2 -
-          GROUND_HEIGHT,
+        x: Constants.SCREEN_WIDTH + Constants.OBSTACLE_HEIGHT / 2,
+        y: getY(),
       },
       size: {
         width: Constants.SCREEN_HEIGHT * 0.3,
         height: Constants.SCREEN_HEIGHT * 0.5,
       },
-      label: "Obstacle1",
       isStatic: true,
       isObstacle: true,
       isDangerous: false,
     }),
-    // Obstacle2: Obstacle(
-    //   world,
-    //   {
-    //     x: Constants.SCREEN_WIDTH * 1.5,
-    //     y:
-    //       Constants.SCREEN_HEIGHT -
-    //       (Constants.SCREEN_HEIGHT * 0.5) / 2 -
-    //       GROUND_HEIGHT,
-    //   },
-    //   {
-    //     width: Constants.SCREEN_HEIGHT * 0.3,
-    //     height: Constants.SCREEN_HEIGHT * 0.5,
-    //   },
-    //   {
-    //     label: "Obstacle1",
-    //     isStatic: true,
-    //     isObstacle: true,
-    //     isDangerous: true,
-    //   }
-    // ),
+    Obstacle2: Obstacle(world, {
+      pos: {
+        x: Constants.SCREEN_WIDTH * 1.385 + Constants.OBSTACLE_HEIGHT / 2,
+        y: getY(),
+      },
+      size: {
+        width: Constants.SCREEN_HEIGHT * 0.3,
+        height: Constants.SCREEN_HEIGHT * 0.5,
+      },
+      isStatic: true,
+      isObstacle: true,
+      isDangerous: false,
+    }),
+    Obstacle3: Obstacle(world, {
+      pos: {
+        x: Constants.SCREEN_WIDTH * 1.77 + Constants.OBSTACLE_HEIGHT / 2,
+        y: getY(),
+      },
+      size: {
+        width: Constants.SCREEN_HEIGHT * 0.3,
+        height: Constants.SCREEN_HEIGHT * 0.5,
+      },
+      isStatic: true,
+      isObstacle: true,
+      isDangerous: false,
+    }),
   };
 }

@@ -1,21 +1,19 @@
 import { Dimensions, View } from "react-native";
 import Matter from "matter-js";
+import Constants from "../Constants";
 
-const Obstacle = ({ body, options }) => {
-  const { size, isDangerous } = options;
+const Obstacle = ({ body, size, isDangerous }) => {
   const {
     position: { x, y },
   } = body;
-  const { width, height } = size;
-
-  const xPos = x - width / 2;
-  const yPos = y - height / 2;
+  const xPos = x - size / 2;
+  const yPos = y - size / 2;
 
   return (
     <View
       style={{
-        width: width,
-        height: height,
+        width: size,
+        height: size,
         left: xPos,
         top: yPos,
         borderColor: isDangerous ? "red" : "black",
@@ -27,22 +25,15 @@ const Obstacle = ({ body, options }) => {
 };
 
 export default (world, options) => {
-  const { pos, size, label, isStatic, isObstacle, isDangerous } = options;
+  const { pos, isDangerous } = options;
+  const size = Constants.OBSTACLE_HEIGHT;
 
-  const obstacle = Matter.Bodies.rectangle(
-    pos.x,
-    pos.y,
-    size.width,
-    size.height,
-    {
-      label: label,
-      isStatic,
-      isObstacle,
-      isDangerous,
-    }
-  );
+  const obstacle = Matter.Bodies.rectangle(pos.x, pos.y, size, size, {
+    isStatic: true,
+    isDangerous,
+  });
 
   Matter.World.add(world, obstacle);
 
-  return { body: obstacle, options, renderer: <Obstacle /> };
+  return { body: obstacle, size: size, isDangerous, renderer: <Obstacle /> };
 };

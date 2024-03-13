@@ -1,28 +1,25 @@
 import Matter from "matter-js";
 import Constants from "./Constants";
-import { roll } from "./_utils";
+import { getY, roll } from "./_utils";
 
 const Physics = (entities, { touches, dispatch, events, time }) => {
   let engine = entities.physics.engine;
 
   // Obstacle Movement
-  for (let i = 1; i <= 1; i++) {
+  for (let i = 1; i <= 3; i++) {
     // TODO update i max to 2
     const box = entities[`Obstacle${i}`];
 
     if (box.body.bounds.max.x < 0) {
       if (roll(50)) {
-        box.options.isDangerous = true;
+        box.isDangerous = true;
       } else {
-        box.options.isDangerous = false;
+        box.isDangerous = false;
       }
 
       Matter.Body.setPosition(box.body, {
-        x: Constants.SCREEN_WIDTH,
-        y:
-          Constants.SCREEN_HEIGHT -
-          (Constants.SCREEN_HEIGHT * 0.5) / 2 -
-          Constants.GROUND_HEIGHT,
+        x: Constants.SCREEN_WIDTH + Constants.OBSTACLE_HEIGHT / 2,
+        y: getY(),
       });
     } else {
       Matter.Body.translate(box.body, { x: -3, y: 0 }); // Translate by 10 units in the x-axis
