@@ -1,14 +1,20 @@
 import React from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  TouchableHighlight,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
-function GameOverModal() {
+function GameOverModal({ onRestart }) {
   return (
     <View style={styles.backdrop}>
       <View style={styles.container}>
         <Text style={[styles.text, styles.heading]}>Game Over</Text>
         <Text style={[styles.text, styles.subheading]}>Try again?</Text>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Yes</Text>
+        <TouchableOpacity style={styles.button} onPress={onRestart}>
+          <Text style={styles.buttonText}>Let's Go!</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -42,14 +48,13 @@ const styles = StyleSheet.create({
   heading: {
     fontSize: 32,
     fontWeight: "bold",
-    marginBottom: 12,
   },
   subheading: {
     fontSize: 24,
-    marginBottom: 24,
+    marginBottom: 32,
   },
   button: {
-    backgroundColor: "red",
+    backgroundColor: "#0099d1",
     paddingVertical: 8,
     paddingHorizontal: 12,
     justifyContent: "center",

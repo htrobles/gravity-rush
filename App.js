@@ -39,9 +39,18 @@ export default function App() {
         setRunning(false);
         setShowGameOver(true);
         break;
+      case "pause":
+        setRunning(false);
+        break;
       default:
         break;
     }
+  };
+
+  const handleRestart = () => {
+    setRunning(true);
+    gameEngine.dispatch({ type: "reset-game" });
+    setShowGameOver(false);
   };
 
   return (
@@ -69,7 +78,7 @@ export default function App() {
           Dash
         </ControlButton>
       ) : null}
-      {showGameOver ? <GameOverModal /> : null}
+      {showGameOver ? <GameOverModal onRestart={handleRestart} /> : null}
     </View>
   );
 }
