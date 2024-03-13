@@ -8,6 +8,7 @@ import Constants from "./Constants";
 import ControlButton from "./components/ControlButton";
 import GameOverModal from "./components/GameOverModal";
 import Scoreboard from "./components/Scoreboard";
+import DashButton from "./components/DashButton";
 
 export default function App() {
   const [gameEngine, setGameEngine] = useState(null);
@@ -28,16 +29,19 @@ export default function App() {
   };
 
   const handlePressDash = () => {
-    gameEngine.dispatch({ type: "dash" });
+    if (dashes > 0) {
+      gameEngine.dispatch({ type: "dash" });
+      setDashes(dashes - 1);
+    }
   };
 
   const handleGainDashProgress = () => {
     if (dashes < 5) {
-      if (dashProgress < 5) {
-        setDashProgress(dashProgress + 1);
-      } else {
+      if (dashProgress + 1 >= Constants.DASH_MAX_PROGRESS) {
         setDashes(dashes + 1);
         setDashProgress(0);
+      } else {
+        setDashProgress(dashProgress + 1);
       }
     }
   };
@@ -90,9 +94,13 @@ export default function App() {
         {!running ? "Start" : isGravityDown ? "Up" : "Down"}
       </ControlButton>
       {running ? (
-        <ControlButton styles={[styles.dashBtn]} onPress={handlePressDash}>
+        <DashButton
+          styles={[styles.dashBtn]}
+          onPress={handlePressDash}
+          progress={dashProgress}
+        >
           {dashes}
-        </ControlButton>
+        </DashButton>
       ) : null}
       <Scoreboard score={score} />
       {showGameOver ? <GameOverModal onRestart={handleRestart} /> : null}

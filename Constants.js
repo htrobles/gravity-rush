@@ -4,6 +4,7 @@ const SCREEN_HEIGHT = Dimensions.get("window").height;
 const GROUND_HEIGHT = SCREEN_HEIGHT * 0.05;
 const OBSTACLE_HEIGHT = SCREEN_HEIGHT * 0.33;
 const CONTROL_BUTTON_SIZE = SCREEN_HEIGHT * 0.25;
+const DASH_MAX_PROGRESS = 5;
 
 export default {
   SCREEN_WIDTH,
@@ -12,4 +13,5 @@ export default {
   GROUND_HEIGHT,
   OBSTACLE_HEIGHT,
   CONTROL_BUTTON_SIZE,
+  DASH_MAX_PROGRESS,
 };
