@@ -1,6 +1,7 @@
 import Matter from "matter-js";
 import Constants from "./Constants";
 import { getY, roll } from "./_utils";
+import { dash, switchGravity } from "./gameFunctions";
 
 const Physics = (entities, { touches, dispatch, events, time }) => {
   let engine = entities.physics.engine;
@@ -22,19 +23,22 @@ const Physics = (entities, { touches, dispatch, events, time }) => {
         y: getY(),
       });
     } else {
-      Matter.Body.translate(box.body, { x: -3, y: 0 }); // Translate by 10 units in the x-axis
+      Matter.Body.translate(box.body, { x: -3, y: 0 });
     }
   }
 
   // Events
   if (events.length) {
     for (let i = 0; i < events.length; i++) {
-      if (events[i].type === "switch-gravity") {
-        if (!engine.world.gravity.y) {
-          engine.world.gravity.y = 0.5;
-        } else {
-          engine.world.gravity.y *= -1; // Reverse the gravity (you can adjust this logic based on your needs)
-        }
+      switch (events[i].type) {
+        case "switch-gravity":
+          switchGravity(engine);
+          break;
+        case "dash":
+          dash(entities.Player);
+          break;
+        default:
+          break;
       }
     }
   }

@@ -6,14 +6,14 @@ const Player = ({ body, flipped }) => {
   const {
     position: { x, y },
   } = body;
-  const xPos = x - Constants.PLAYER_HEIGHT / 2;
-  const yPos = y - Constants.PLAYER_HEIGHT / 2;
+  const xPos = x - Constants.PLAYER_SIZE / 2;
+  const yPos = y - Constants.PLAYER_SIZE / 2;
 
   return (
     <View
       style={{
-        width: Constants.PLAYER_HEIGHT,
-        height: Constants.PLAYER_HEIGHT,
+        width: Constants.PLAYER_SIZE,
+        height: Constants.PLAYER_SIZE,
         left: xPos,
         top: yPos,
         borderWidth: 1,
@@ -29,8 +29,8 @@ export default (world, pos, extraOptions) => {
   const player = Matter.Bodies.rectangle(
     pos.x,
     pos.y,
-    Constants.PLAYER_HEIGHT,
-    Constants.PLAYER_HEIGHT,
+    Constants.PLAYER_SIZE,
+    Constants.PLAYER_SIZE,
     {
       label: "Player",
       isStatic: false,

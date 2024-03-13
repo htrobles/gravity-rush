@@ -19,8 +19,16 @@ export default function App() {
   const [isGravityDown, setIsGravityDown] = useState(true);
 
   const handlePressSwitchGravity = () => {
-    setIsGravityDown(!isGravityDown);
-    gameEngine.dispatch({ type: "switch-gravity" });
+    if (!running) {
+      setRunning(true);
+    } else {
+      setIsGravityDown(!isGravityDown);
+      gameEngine.dispatch({ type: "switch-gravity" });
+    }
+  };
+
+  const handlePressDash = () => {
+    gameEngine.dispatch({ type: "dash" });
   };
 
   return (
@@ -32,16 +40,21 @@ export default function App() {
         style={styles.container}
         systems={[Physics]}
         entities={entities()}
-        running={true}
+        running={running}
       >
         <StatusBar hidden={true} />
       </GameEngine>
       <ControlButton
-        styles={[styles.switchGravity]}
+        styles={[styles.switchGravityBtn]}
         onPress={handlePressSwitchGravity}
       >
-        {isGravityDown ? "Up" : "Down"}
+        {!running ? "Start" : isGravityDown ? "Up" : "Down"}
       </ControlButton>
+      {running ? (
+        <ControlButton styles={[styles.dashBtn]} onPress={handlePressDash}>
+          Dash
+        </ControlButton>
+      ) : null}
     </View>
   );
 }
@@ -50,5 +63,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#0f1e2b",
+  },
+  switchGravityBtn: {
+    bottom: Constants.SCREEN_HEIGHT * 0.05,
+    left: Constants.SCREEN_HEIGHT * 0.05,
+  },
+  dashBtn: {
+    bottom: Constants.SCREEN_HEIGHT * 0.05,
+    right: Constants.SCREEN_HEIGHT * 0.05,
   },
 });
