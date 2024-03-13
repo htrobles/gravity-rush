@@ -16,7 +16,7 @@ const Obstacle = ({ body, size, isDangerous }) => {
         height: size,
         left: xPos,
         top: yPos,
-        borderColor: isDangerous ? "red" : "black",
+        borderColor: isDangerous ? "red" : "#fff",
         borderWidth: 1,
         position: "absolute",
       }}

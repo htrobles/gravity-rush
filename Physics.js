@@ -26,15 +26,18 @@ const Physics = (entities, { touches, dispatch, events, time }) => {
     }
   }
 
-  touches
-    .filter((t) => t.type === "press")
-    .forEach(() => {
-      if (!engine.world.gravity.y) {
-        engine.world.gravity.y = 0.5;
-      } else {
-        engine.world.gravity.y *= -1; // Reverse the gravity (you can adjust this logic based on your needs)
+  // Events
+  if (events.length) {
+    for (let i = 0; i < events.length; i++) {
+      if (events[i].type === "switch-gravity") {
+        if (!engine.world.gravity.y) {
+          engine.world.gravity.y = 0.5;
+        } else {
+          engine.world.gravity.y *= -1; // Reverse the gravity (you can adjust this logic based on your needs)
+        }
       }
-    });
+    }
+  }
 
   Matter.Engine.update(engine, time.delta);
 

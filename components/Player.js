@@ -17,7 +17,7 @@ const Player = ({ body, flipped }) => {
         left: xPos,
         top: yPos,
         borderWidth: 1,
-        borderColor: "#000",
+        borderColor: "#fff",
         position: "absolute",
         transform: [{ scaleY: flipped ? -1 : 1 }],
       }}

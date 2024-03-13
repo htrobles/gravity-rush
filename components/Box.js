@@ -6,7 +6,6 @@ const Box = ({ size, body, color, extraOptions }) => {
     position: { x, y },
   } = body;
   const { width, height } = size;
-  const { isDangerous } = extraOptions;
 
   const xPos = x - width / 2;
   const yPos = y - height / 2;
@@ -18,7 +17,7 @@ const Box = ({ size, body, color, extraOptions }) => {
         height: height,
         left: xPos,
         top: yPos,
-        borderColor: isDangerous ? "red" : color || "black",
+        borderColor: "#fff",
         borderWidth: 1,
         position: "absolute",
       }}
@@ -26,7 +25,7 @@ const Box = ({ size, body, color, extraOptions }) => {
   );
 };
 
-export default (world, color, pos, size, extraOptions) => {
+export default (world, pos, size, extraOptions) => {
   const { label, isStatic, isObstacle, isDangerous } = extraOptions;
 
   const box = Matter.Bodies.rectangle(pos.x, pos.y, size.width, size.height, {
@@ -37,5 +36,5 @@ export default (world, color, pos, size, extraOptions) => {
   });
   Matter.World.add(world, box);
 
-  return { body: box, color, pos, size, extraOptions, renderer: <Box /> };
+  return { body: box, pos, size, extraOptions, renderer: <Box /> };
 };

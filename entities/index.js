@@ -20,7 +20,6 @@ export default function entities() {
     }),
     Ceiling: Box(
       world,
-      "green",
       {
         x: Constants.SCREEN_WIDTH / 2,
         y: GROUND_HEIGHT / 2,
@@ -30,7 +29,6 @@ export default function entities() {
     ),
     Ground: Box(
       world,
-      "green",
       {
         x: Constants.SCREEN_WIDTH / 2,
         y: Constants.SCREEN_HEIGHT - GROUND_HEIGHT / 2,
