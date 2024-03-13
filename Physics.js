@@ -1,7 +1,7 @@
 import Matter from "matter-js";
 import Constants from "./Constants";
 import { getY, roll } from "./_utils";
-import { dash, switchGravity } from "./gameFunctions";
+import { pushPlayer, switchGravity } from "./gameFunctions";
 
 const Physics = (entities, { touches, dispatch, events, time }) => {
   let engine = entities.physics.engine;
@@ -41,7 +41,7 @@ const Physics = (entities, { touches, dispatch, events, time }) => {
           switchGravity(engine);
           break;
         case "dash":
-          dash(entities.Player);
+          pushPlayer(entities.Player);
           break;
         default:
           break;
@@ -49,7 +49,6 @@ const Physics = (entities, { touches, dispatch, events, time }) => {
     }
   }
 
-  // === LOSE CONDITIONS ===
   // Collision
   Matter.Events.on(engine, "collisionStart", (event) => {
     const pairs = event.pairs;

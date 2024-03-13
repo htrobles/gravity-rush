@@ -12,6 +12,7 @@ import Physics from "./Physics";
 import entities from "./entities";
 import Constants from "./Constants";
 import ControlButton from "./components/ControlButton";
+import GameOverModal from "./components/GameOverModal";
 
 export default function App() {
   const [gameEngine, setGameEngine] = useState(null);
@@ -33,17 +34,11 @@ export default function App() {
   };
 
   const handleEvent = (e) => {
-    console.log(e);
-
     switch (e.type) {
       case "game-over":
         setRunning(false);
+        setShowGameOver(true);
         break;
-      case "collide":
-        setRunning(false);
-        console.log(e);
-        break;
-
       default:
         break;
     }
@@ -74,6 +69,7 @@ export default function App() {
           Dash
         </ControlButton>
       ) : null}
+      {showGameOver ? <GameOverModal /> : null}
     </View>
   );
 }

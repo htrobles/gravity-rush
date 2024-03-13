@@ -7,7 +7,3 @@ export function switchGravity(engine) {
     engine.world.gravity.y *= -1;
   }
 }
-
-export function dash(entity) {
-  Matter.Body.applyForce(entity.body, entity.body.position, { x: 0.125, y: 0 });
-}
