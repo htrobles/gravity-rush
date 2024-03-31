@@ -14,10 +14,15 @@ export default function entities() {
 
   return {
     physics: { engine, world },
-    Player: Player(world, {
-      x: Constants.SCREEN_WIDTH / 2,
-      y: Constants.SCREEN_HEIGHT / 2,
-    }),
+    Player: Player(
+      world,
+      {
+        x: Constants.SCREEN_WIDTH / 2,
+        y: Constants.SCREEN_HEIGHT / 2,
+      },
+      null,
+      { animType: "float" }
+    ),
     Ceiling: Box(
       world,
       {

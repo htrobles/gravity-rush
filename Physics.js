@@ -44,6 +44,7 @@ const Physics = (entities, { touches, dispatch, events, time }) => {
           break;
         case "reset-game":
           resetGame(entities, dispatch);
+          entities.Player.animOpitons.animType = "float";
           break;
         default:
           break;
@@ -61,12 +62,14 @@ const Physics = (entities, { touches, dispatch, events, time }) => {
       dispatch({
         type: "game-over",
       });
+      entities.Player.animOpitons.animType = "dead";
     }
   });
 
   // Player Leave the Screen
   if (entities.Player.body.bounds.max.x < 0) {
     dispatch({ type: "game-over" });
+    entities.Player.animOpitons.animType = "dead";
   }
 
   Matter.Engine.update(engine, time.delta);
