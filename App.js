@@ -9,6 +9,7 @@ import ControlButton from "./components/ControlButton";
 import GameOverModal from "./components/GameOverModal";
 import Scoreboard from "./components/Scoreboard";
 import DashButton from "./components/DashButton";
+import Splashscreen from "./components/Splashscreen";
 
 export default function App() {
   const [gameEngine, setGameEngine] = useState(null);
@@ -18,6 +19,7 @@ export default function App() {
   const [score, setScore] = useState(0);
   const [dashProgress, setDashProgress] = useState(0);
   const [dashes, setDashes] = useState(1);
+  const [showsSplash, setShowSpalash] = useState(true);
 
   const handlePressSwitchGravity = () => {
     if (!running) {
@@ -74,39 +76,42 @@ export default function App() {
   };
 
   return (
-    <View style={styles.container}>
-      <GameEngine
-        ref={(ref) => {
-          setGameEngine(ref);
-        }}
-        style={styles.container}
-        systems={[Physics]}
-        entities={entities()}
-        running={running}
-        onEvent={handleEvent}
-      >
-        <StatusBar hidden={true} />
-      </GameEngine>
-      <ControlButton
-        styles={[styles.switchGravityBtn]}
-        onPress={handlePressSwitchGravity}
-      >
-        {!running ? "Start" : isGravityDown ? "Up" : "Down"}
-      </ControlButton>
-      {running ? (
-        <DashButton
-          styles={[styles.dashBtn]}
-          onPress={handlePressDash}
-          progress={dashProgress}
+    <>
+      <View style={styles.container}>
+        <GameEngine
+          ref={(ref) => {
+            setGameEngine(ref);
+          }}
+          style={styles.container}
+          systems={[Physics]}
+          entities={entities()}
+          running={running}
+          onEvent={handleEvent}
         >
-          {dashes}
-        </DashButton>
-      ) : null}
-      <Scoreboard score={score} />
-      {showGameOver ? (
-        <GameOverModal onRestart={handleRestart} score={score} />
-      ) : null}
-    </View>
+          <StatusBar hidden={true} />
+        </GameEngine>
+        <ControlButton
+          styles={[styles.switchGravityBtn]}
+          onPress={handlePressSwitchGravity}
+        >
+          {!running ? "Start" : isGravityDown ? "Up" : "Down"}
+        </ControlButton>
+        {running ? (
+          <DashButton
+            styles={[styles.dashBtn]}
+            onPress={handlePressDash}
+            progress={dashProgress}
+          >
+            {dashes}
+          </DashButton>
+        ) : null}
+        <Scoreboard score={score} />
+        {showGameOver ? (
+          <GameOverModal onRestart={handleRestart} score={score} />
+        ) : null}
+      </View>
+      {showsSplash && <Splashscreen onHide={() => setShowSpalash(false)} />}
+    </>
   );
 }
 

@@ -35,8 +35,6 @@ const Player = ({ body, flipped, animOpitons: { animType } }) => {
     }
   }, [animType]);
 
-  console.log({ animType });
-
   return (
     <View
       style={{

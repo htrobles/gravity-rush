@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 0,
     alignSelf: "center",
-    backgroundColor: "rgba(0, 0, 0, .25)",
+    backgroundColor: "#000",
     borderWidth: 1,
     borderColor: "#fff",
     borderRadius: 10,
