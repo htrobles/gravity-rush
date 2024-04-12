@@ -19,7 +19,7 @@ export default function App() {
   const [score, setScore] = useState(0);
   const [dashProgress, setDashProgress] = useState(0);
   const [dashes, setDashes] = useState(1);
-  const [showsSplash, setShowSpalash] = useState(true);
+  const [showsSplash, setShowSplash] = useState(true);
 
   const handlePressSwitchGravity = () => {
     if (!running) {
@@ -110,7 +110,7 @@ export default function App() {
           <GameOverModal onRestart={handleRestart} score={score} />
         ) : null}
       </View>
-      {showsSplash && <Splashscreen onHide={() => setShowSpalash(false)} />}
+      {showsSplash && <Splashscreen onHide={() => setShowSplash(false)} />}
     </>
   );
 }
