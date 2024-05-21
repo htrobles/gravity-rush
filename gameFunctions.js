@@ -3,10 +3,10 @@ import Constants from "./Constants";
 import { getY } from "./_utils";
 
 export function switchGravity(engine) {
-  if (!engine.world.gravity.y) {
+  if (engine.world.gravity.y < 0) {
     engine.world.gravity.y = Constants.GRAVITY_STRENGTH;
   } else {
-    engine.world.gravity.y *= -Constants.GRAVITY_STRENGTH;
+    engine.world.gravity.y = -Constants.GRAVITY_STRENGTH;
   }
 }
 
@@ -48,7 +48,7 @@ export function resetGame(entities, dispatch) {
     });
     box.isDangerous = false;
     box.body.isDangerous = false;
-    engine.world.gravity.y = 0.5;
+    engine.world.gravity.y = Constants.GRAVITY_STRENGTH;
 
     dispatch({ type: "pause" });
   }
